@@ -98,5 +98,21 @@ python tests/run_tests.py --record   # перезаписать эталон п�
 - состояние собрано в `GreenhouseState`;
 - `applyAction(state, action)` — чистая функция: возвращает `Outcome` (новое состояние, сообщение, успех или отказ)
   и не меняет входное состояние. Её поведение проверено `static_assert` при компиляции;
-- `true/false` печатается через `boolText`, флаги потока больше не трогаются;
+- `true/false` печатается через `valveOpenText`, флаги потока больше не трогаются;
 - потоки передаются явно: `run(std::istream&, std::ostream&)`, а `main` только вызывает `run(std::cin, std::cout)`.
+
+## Сверка с контрактом
+
+| Элемент контракта | Где в коде |
+|---|---|
+| Начальная влажность `0..100` | `isValidMoisture`, `run` |
+| Коды завершения `0 / 1 / 2` | `ExitCode` |
+| Команды `0..4` | `enum class Action { Exit, Status, OpenValve, CloseValve, PulseWater }` |
+| `OpenValve (2)`: клапан закрыт и влажность `< 60`, иначе `Open denied` без изменений | `canOpenValve`, `applyAction` |
+| `CloseValve (3)`: всегда, клапан → `Closed`, счётчик +1 | `applyAction` |
+| `PulseWater (4)`: клапан закрыт и влажность `< 85`, иначе `Pulse denied`; +20 % (не выше 100), +5 л, клапан закрыт | `canPulseWater`, `moistureAfterPulse` |
+| Лимит 8 успешных операций; `Unknown action` и отказы счётчик не меняют | `hasOperationsLeft`, `completed` / `rejected` |
+| Телеметрия после успеха и итог сеанса | `printOutcome`, `printStatus`, `printSummary` |
+
+Состояние клапана хранится как `enum class ValveState { Closed, Open }`. Каждое правило проверено `static_assert`,
+вывод целиком проверен тестами.
