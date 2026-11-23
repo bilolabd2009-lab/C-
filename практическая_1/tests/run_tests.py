@@ -87,6 +87,8 @@ def run(exe: Path, stdin: str) -> tuple[str, int]:
 def main() -> None:
     record = "--record" in sys.argv
     source = LEGACY_SRC if (record or "--legacy" in sys.argv) else CURRENT_SRC
+    if "--src" in sys.argv:
+        source = Path(sys.argv[sys.argv.index("--src") + 1]).resolve()
 
     with tempfile.TemporaryDirectory() as tmp:
         exe = build(source, Path(tmp))
