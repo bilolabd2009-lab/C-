@@ -1,0 +1,35 @@
+Moisture: Action 0/1/2/3/4: Pulse completed
+Valve open: false
+Moisture: 30%
+Water used: 5 L
+Action 0/1/2/3/4: Valve opened
+Valve open: true
+Moisture: 30%
+Water used: 5 L
+Action 0/1/2/3/4: Pulse denied
+Action 0/1/2/3/4: Valve closed
+Valve open: false
+Moisture: 30%
+Water used: 5 L
+Action 0/1/2/3/4: Pulse completed
+Valve open: false
+Moisture: 50%
+Water used: 10 L
+Action 0/1/2/3/4: Status
+Valve open: false
+Moisture: 50%
+Water used: 10 L
+Action 0/1/2/3/4: Valve closed
+Valve open: false
+Moisture: 50%
+Water used: 10 L
+Action 0/1/2/3/4: Valve opened
+Valve open: true
+Moisture: 50%
+Water used: 10 L
+Action 0/1/2/3/4: Status
+Valve open: true
+Moisture: 50%
+Water used: 10 L
+Operations: 8
+Total water: 10 L
