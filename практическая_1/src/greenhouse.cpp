@@ -3,6 +3,8 @@
 // Этап 2. Именование и типизация: константы, перечисления, понятные имена.
 // Этап 3. Выделение чистых функций: правила предметной области вынесены
 // в функции без ввода-вывода и без побочных эффектов.
+// Этап 4. Устранение дублирования вывода: печать сообщения + статуса,
+// приглашение с чтением числа и сообщение об ошибке ввода — по одному разу.
 
 constexpr int kMinMoisturePercent = 0;
 constexpr int kMaxMoisturePercent = 100;
@@ -67,15 +69,23 @@ void printStatus(bool isValveOpen, int moisturePercent, int waterUsedLiters) {
     std::cout << "Water used: " << waterUsedLiters << " L\n";
 }
 
+// Печатает приглашение и читает целое число. При ошибке сам сообщает о ней.
+bool promptInt(const char* prompt, int& value) {
+    std::cout << prompt;
+    if (std::cin >> value) {
+        return true;
+    }
+    std::cout << "Input error\n";
+    return false;
+}
+
 int main() {
     int moisturePercent;
     bool isValveOpen = false;
     int operationCount = 0;
     int waterUsedLiters = 0;
 
-    std::cout << "Moisture: ";
-    if (!(std::cin >> moisturePercent)) {
-        std::cout << "Input error\n";
+    if (!promptInt("Moisture: ", moisturePercent)) {
         return kExitInputError;
     }
 
@@ -86,52 +96,56 @@ int main() {
 
     while (operationCount < kMaxOperations) {
         int actionCode;
-        std::cout << "Action 0/1/2/3/4: ";
-
-        if (!(std::cin >> actionCode)) {
-            std::cout << "Input error\n";
+        if (!promptInt("Action 0/1/2/3/4: ", actionCode)) {
             return kExitInputError;
         }
 
         const Action action = toAction(actionCode);
-
         if (action == Action::Exit) {
             break;
         }
-        else if (action == Action::Status) {
+
+        // Ветки только решают, что произошло. Успешная операция задаёт
+        // completedMessage, а счёт и печать статуса выполняются ниже один раз.
+        const char* completedMessage = nullptr;
+        const char* rejectedMessage = nullptr;
+
+        switch (action) {
+            case Action::Status:
+                completedMessage = "Status";
+                break;
+            case Action::OpenValve:
+                if (canOpenValve(isValveOpen, moisturePercent)) {
+                    isValveOpen = true;
+                    completedMessage = "Valve opened";
+                } else {
+                    rejectedMessage = "Open denied";
+                }
+                break;
+            case Action::CloseValve:
+                isValveOpen = false;
+                completedMessage = "Valve closed";
+                break;
+            case Action::WaterPulse:
+                if (canWaterPulse(isValveOpen, moisturePercent)) {
+                    moisturePercent = moistureAfterPulse(moisturePercent);
+                    waterUsedLiters += kPulseWaterLiters;
+                    completedMessage = "Pulse completed";
+                } else {
+                    rejectedMessage = "Pulse denied";
+                }
+                break;
+            default:
+                rejectedMessage = "Unknown action";
+                break;
+        }
+
+        if (completedMessage != nullptr) {
             operationCount++;
-            std::cout << "Status\n";
+            std::cout << completedMessage << "\n";
             printStatus(isValveOpen, moisturePercent, waterUsedLiters);
-        }
-        else if (action == Action::OpenValve) {
-            if (canOpenValve(isValveOpen, moisturePercent)) {
-                isValveOpen = true;
-                operationCount++;
-                std::cout << "Valve opened\n";
-                printStatus(isValveOpen, moisturePercent, waterUsedLiters);
-            } else {
-                std::cout << "Open denied\n";
-            }
-        }
-        else if (action == Action::CloseValve) {
-            isValveOpen = false;
-            operationCount++;
-            std::cout << "Valve closed\n";
-            printStatus(isValveOpen, moisturePercent, waterUsedLiters);
-        }
-        else if (action == Action::WaterPulse) {
-            if (canWaterPulse(isValveOpen, moisturePercent)) {
-                moisturePercent = moistureAfterPulse(moisturePercent);
-                waterUsedLiters = waterUsedLiters + kPulseWaterLiters;
-                operationCount++;
-                std::cout << "Pulse completed\n";
-                printStatus(isValveOpen, moisturePercent, waterUsedLiters);
-            } else {
-                std::cout << "Pulse denied\n";
-            }
-        }
-        else {
-            std::cout << "Unknown action\n";
+        } else {
+            std::cout << rejectedMessage << "\n";
         }
     }
 
