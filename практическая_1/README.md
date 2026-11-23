@@ -7,6 +7,7 @@
 | Этап | Что сделано |
 |---|---|
 | 1. Фиксация поведения | golden-master тесты, эталон записан по legacy-версии |
+| 2. Именование и типизация | константы вместо магических чисел, `enum class Action`, коды возврата |
 
 ## Как запустить тесты
 
@@ -40,3 +41,13 @@ python tests/run_tests.py --record   # перезаписать эталон п�
 | неизвестный код | `Unknown action`, операцией не считается |
 | 8 операций | цикл завершается сам, следующий ввод не читается |
 | приглашения `Moisture: ` и `Action 0/1/2/3/4: ` | печатаются без перевода строки |
+
+## Этап 2. Именование и типизация
+
+- Магические числа `0, 100, 60, 85, 20, 5, 8` стали константами `kMinMoisturePercent`, `kOpenMoistureLimitPercent`,
+  `kPulseMoistureGainPercent`, `kPulseWaterLiters`, `kMaxOperations` и т. д. В имени есть единица измерения (`Percent`, `Liters`).
+- Коды действий `0..4` стали `enum class Action`. У него фиксированный базовый тип `int`, поэтому приведение
+  неизвестного кода (например `9` или `-1`) определено и просто попадает в ветку `Unknown action`.
+- Коды возврата `0/1/2` стали `ExitCode`.
+- Переменные переименованы: `valve` → `isValveOpen`, `moisture` → `moisturePercent`, `water` → `waterUsedLiters`,
+  `operations` → `operationCount`, `code` → `actionCode`. Сравнение `valve == true` заменено на `isValveOpen`.
