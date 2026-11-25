@@ -1,0 +1,782 @@
+{
+  "student": "Абдуллаев Билол",
+  "group": "9/2-РПО-25/3",
+  "version": "Mark 1.01 · 0.1.1 · 25/3 · ДЗ за 3 пары",
+  "startedAt": "2026-11-25T16:33:34.8331338+03:00",
+  "updatedAt": "2026-11-25T16:44:14.1923791+03:00",
+  "tasks": {
+    "1.1": {
+      "code": "#include \u003ciostream\u003e\n\nint rentalPrice(int hours, bool student) {\n    constexpr int PRICE_PER_HOUR = 120;\n    constexpr int MAX_HOURS = 24;\n    constexpr int DISCOUNT_PERCENT = 25;\n    constexpr int PERCENT_BASE = 100;\n    \n    // TODO: исправьте границы и замените магические числа.\n    if (hours \u003c 1 || hours \u003e MAX_HOURS) return -1;\n    \n    if (student) return hours * PRICE_PER_HOUR * (PERCENT_BASE - DISCOUNT_PERCENT) / PERCENT_BASE;\n    \n    return hours * PRICE_PER_HOUR;\n}\n\nint main() {\n    int hours{}, student{};\n    if (!(std::cin \u003e\u003e hours \u003e\u003e student)) return 1;\n    std::cout \u003c\u003c rentalPrice(hours, student != 0) \u003c\u003c \"\\n\";\n}",
+      "result": {
+        "status": "passed",
+        "message": "Все проверки пройдены.",
+        "codeHash": "98696167416a928e36bc3a8cfb3bdb894a79f20ab2bdd33b6005cdf57614944b",
+        "compiler": "gcc",
+        "standard": "c++20",
+        "compilation": "",
+        "cases": [
+          {
+            "name": "Один час",
+            "input": "1 0\n",
+            "expected": "120\n",
+            "actual": "120\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 37,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Студенческая скидка",
+            "input": "2 1\n",
+            "expected": "180\n",
+            "actual": "180\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 29,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Верхняя граница",
+            "input": "24 1\n",
+            "expected": "2160\n",
+            "actual": "2160\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Нулевые часы",
+            "input": "0 0\n",
+            "expected": "-1\n",
+            "actual": "-1\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Свыше суток",
+            "input": "25 0\n",
+            "expected": "-1\n",
+            "actual": "-1\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Час со скидкой",
+            "input": "1 1\n",
+            "expected": "90\n",
+            "actual": "90\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Двенадцать часов",
+            "input": "12 0\n",
+            "expected": "1440\n",
+            "actual": "1440\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          }
+        ],
+        "durationMs": 1143,
+        "checkedAt": "2026-11-25T16:42:40.2269224+03:00"
+      },
+      "updatedAt": "2026-11-25T16:42:41.3713201+03:00"
+    },
+    "1.2": {
+      "code": "#include \u003ciostream\u003e\n\nenum class ServiceState : int { New = 1, Approved = 2, Closed = 3 };\n\nint stateCode(ServiceState state) {\n    switch (state) {\n        case ServiceState::New:      return 10;\n        case ServiceState::Approved: return 20;\n        case ServiceState::Closed:   return 30;\n        default:                     return -1;\n    }\n}\n\nint main() {\n    int value{};\n    if (!(std::cin \u003e\u003e value)) return 1;\n    std::cout \u003c\u003c stateCode(static_cast\u003cServiceState\u003e(value)) \u003c\u003c \"\\n\";\n}",
+      "result": {
+        "status": "passed",
+        "message": "Все проверки пройдены.",
+        "codeHash": "8b7b297ce92a0543e01f8ac8e235be9078651dc826e3a933ff67d10989360987",
+        "compiler": "gcc",
+        "standard": "c++20",
+        "compilation": "",
+        "cases": [
+          {
+            "name": "Новая",
+            "input": "1\n",
+            "expected": "10\n",
+            "actual": "10\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 30,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Подтверждена",
+            "input": "2\n",
+            "expected": "20\n",
+            "actual": "20\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 30,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Закрыта",
+            "input": "3\n",
+            "expected": "30\n",
+            "actual": "30\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Несуществующий код",
+            "input": "99\n",
+            "expected": "-1\n",
+            "actual": "-1\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Отрицательный код",
+            "input": "-4\n",
+            "expected": "-1\n",
+            "actual": "-1\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          }
+        ],
+        "durationMs": 853,
+        "checkedAt": "2026-11-25T16:42:41.4054776+03:00"
+      },
+      "updatedAt": "2026-11-25T16:42:42.259889+03:00"
+    },
+    "2.1": {
+      "code": "#include \u003ciostream\u003e\n\nvoid addCredits(int\u0026 credits, int amount) {\n    // TODO: добавьте проверки перед изменением исходной переменной.\n    if (credits \u003c 0 || credits \u003e 1000) return;\n    if (amount \u003c 1 || amount \u003e 100) return;\n    if (credits + amount \u003e 1000) return;\n    \n    credits += amount;\n}\n\nint main() {\n    int credits{}, amount{};\n    if (!(std::cin \u003e\u003e credits \u003e\u003e amount)) return 1;\n    addCredits(credits, amount);\n    std::cout \u003c\u003c credits \u003c\u003c \"\\n\";\n}",
+      "result": {
+        "status": "passed",
+        "message": "Все проверки пройдены.",
+        "codeHash": "384141979e11c180e8476f9aec0df82df623e27a4c99d51355d3b685632b96ae",
+        "compiler": "gcc",
+        "standard": "c++20",
+        "compilation": "",
+        "cases": [
+          {
+            "name": "Обычное пополнение",
+            "input": "50 20\n",
+            "expected": "70\n",
+            "actual": "70\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 32,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Предел достигнут",
+            "input": "1000 1\n",
+            "expected": "1000\n",
+            "actual": "1000\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 32,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Слишком большой взнос",
+            "input": "0 101\n",
+            "expected": "0\n",
+            "actual": "0\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 14,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Отрицательный взнос",
+            "input": "0 -1\n",
+            "expected": "0\n",
+            "actual": "0\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 14,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Ровно до предела",
+            "input": "950 50\n",
+            "expected": "1000\n",
+            "actual": "1000\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 14,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Переполнение лимита",
+            "input": "950 51\n",
+            "expected": "950\n",
+            "actual": "950\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 15,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Недопустимый баланс",
+            "input": "-5 20\n",
+            "expected": "-5\n",
+            "actual": "-5\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          }
+        ],
+        "durationMs": 873,
+        "checkedAt": "2026-11-25T16:42:42.2958705+03:00"
+      },
+      "updatedAt": "2026-11-25T16:42:43.1707864+03:00"
+    },
+    "2.2": {
+      "code": "#include \u003ciostream\u003e\n\nvoid orderBounds(int\u0026 lower, int\u0026 upper) {\n    if (lower \u003e upper) {\n        int temp = lower;\n        lower = upper;\n        upper = temp;\n    }\n}\n\nint main() {\n    int a{}, b{};\n    if (!(std::cin \u003e\u003e a \u003e\u003e b)) return 1;\n    orderBounds(a, b);\n    std::cout \u003c\u003c a \u003c\u003c \" \" \u003c\u003c b \u003c\u003c \"\\n\";\n}",
+      "result": {
+        "status": "passed",
+        "message": "Все проверки пройдены.",
+        "codeHash": "7fd8e7fb01dd62360cfd8c0a07e9030c9d8a5efd0a22aa18c13ae7eeb45c1e59",
+        "compiler": "gcc",
+        "standard": "c++20",
+        "compilation": "",
+        "cases": [
+          {
+            "name": "Нужно поменять",
+            "input": "9 2\n",
+            "expected": "2 9\n",
+            "actual": "2 9\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 30,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Уже упорядочены",
+            "input": "1 10\n",
+            "expected": "1 10\n",
+            "actual": "1 10\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 38,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Равные",
+            "input": "5 5\n",
+            "expected": "5 5\n",
+            "actual": "5 5\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 14,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Отрицательные",
+            "input": "-1 -9\n",
+            "expected": "-9 -1\n",
+            "actual": "-9 -1\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Разный знак",
+            "input": "-4 4\n",
+            "expected": "-4 4\n",
+            "actual": "-4 4\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          }
+        ],
+        "durationMs": 859,
+        "checkedAt": "2026-11-25T16:42:43.2113577+03:00"
+      },
+      "updatedAt": "2026-11-25T16:42:44.0728635+03:00"
+    },
+    "3.1": {
+      "code": "#include \u003ciostream\u003e\n\nbool charge(int* wallet, int cost) {\n    // TODO: напишите защитные проверки, потом уменьшите *wallet.\n    if (wallet == nullptr) return false;\n    if (cost \u003c= 0) return false;\n    if (*wallet \u003c 0) return false;\n    if (*wallet \u003c cost) return false;\n    \n    *wallet -= cost;\n    return true;\n}\n\nint main() {\n    int money{}, cost{}, absent{};\n    if (!(std::cin \u003e\u003e money \u003e\u003e cost \u003e\u003e absent)) return 1;\n    const bool ok = charge(absent ? nullptr : \u0026money, cost);\n    std::cout \u003c\u003c ok \u003c\u003c \" \" \u003c\u003c money \u003c\u003c \"\\n\";\n}",
+      "result": {
+        "status": "passed",
+        "message": "Все проверки пройдены.",
+        "codeHash": "02fde96f88bad0e568b0e3d7d8512b1183a491815034ae413dc66fe13aa829ac",
+        "compiler": "gcc",
+        "standard": "c++20",
+        "compilation": "",
+        "cases": [
+          {
+            "name": "Успешное списание",
+            "input": "30 10 0\n",
+            "expected": "1 20\n",
+            "actual": "1 20\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 34,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Недостаточно средств",
+            "input": "3 5 0\n",
+            "expected": "0 3\n",
+            "actual": "0 3\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 31,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Отрицательный баланс",
+            "input": "-5 1 0\n",
+            "expected": "0 -5\n",
+            "actual": "0 -5\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Нулевая стоимость",
+            "input": "10 0 0\n",
+            "expected": "0 10\n",
+            "actual": "0 10\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Отрицательная стоимость",
+            "input": "10 -1 0\n",
+            "expected": "0 10\n",
+            "actual": "0 10\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Пустой кошелёк",
+            "input": "0 2 0\n",
+            "expected": "0 0\n",
+            "actual": "0 0\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Отсутствующий адрес",
+            "input": "30 10 1\n",
+            "expected": "0 30\n",
+            "actual": "0 30\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          }
+        ],
+        "durationMs": 898,
+        "checkedAt": "2026-11-25T16:42:44.1490839+03:00"
+      },
+      "updatedAt": "2026-11-25T16:42:45.0491808+03:00"
+    },
+    "3.2": {
+      "code": "#include \u003ciostream\u003e\n\nint balanceOr(const int* wallet) {\n    // TODO: верните -1 для nullptr, иначе значение *wallet.\n    if (wallet == nullptr) return -1;\n    return *wallet;\n}\n\nint main() {\n    int money{}, absent{};\n    if (!(std::cin \u003e\u003e money \u003e\u003e absent)) return 1;\n    std::cout \u003c\u003c balanceOr(absent ? nullptr : \u0026money) \u003c\u003c \"\\n\";\n}",
+      "result": {
+        "status": "passed",
+        "message": "Все проверки пройдены.",
+        "codeHash": "85fe0068d69ded5175396b11f48b0a912a6fb64db9cfa94baedd7beaba1ab90c",
+        "compiler": "gcc",
+        "standard": "c++20",
+        "compilation": "",
+        "cases": [
+          {
+            "name": "Обычный баланс",
+            "input": "123 0\n",
+            "expected": "123\n",
+            "actual": "123\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 30,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Нулевой баланс",
+            "input": "0 0\n",
+            "expected": "0\n",
+            "actual": "0\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 29,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Указатель отсутствует",
+            "input": "50 1\n",
+            "expected": "-1\n",
+            "actual": "-1\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Отрицательное значение в объекте",
+            "input": "-8 0\n",
+            "expected": "-8\n",
+            "actual": "-8\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 12,
+            "message": "Проверка пройдена."
+          }
+        ],
+        "durationMs": 828,
+        "checkedAt": "2026-11-25T16:42:45.0834211+03:00"
+      },
+      "updatedAt": "2026-11-25T16:42:45.912941+03:00"
+    },
+    "4.1": {
+      "code": "#include \u003ciostream\u003e\n\n// TODO: уточните условия и выделите единую проверку.\nbool canShip(int stock, int requested) {\n    return stock \u003e= 0 \u0026\u0026 requested \u003e 0 \u0026\u0026 requested \u003c= stock;\n}\n\nbool ship(int\u0026 stock, int requested) {\n    if (!canShip(stock, requested)) return false;\n    stock -= requested;\n    return true;\n}\n\nint main() {\n    int stock{}, requested{};\n    if (!(std::cin \u003e\u003e stock \u003e\u003e requested)) return 1;\n    const bool success = ship(stock, requested);\n    std::cout \u003c\u003c success \u003c\u003c \" \" \u003c\u003c stock \u003c\u003c \" \"\n              \u003c\u003c canShip(stock, requested) \u003c\u003c \"\\n\";\n}",
+      "result": {
+        "status": "passed",
+        "message": "Все проверки пройдены.",
+        "codeHash": "a16649dfb9396340b431585acda5581bdc2d37b071975d2045a810b8a4984b90",
+        "compiler": "gcc",
+        "standard": "c++20",
+        "compilation": "",
+        "cases": [
+          {
+            "name": "Обычная выдача",
+            "input": "3 1\n",
+            "expected": "1 2 1\n",
+            "actual": "1 2 1\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 30,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Склад пуст",
+            "input": "0 1\n",
+            "expected": "0 0 0\n",
+            "actual": "0 0 0\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 30,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Нулевой запрос",
+            "input": "5 0\n",
+            "expected": "0 5 0\n",
+            "actual": "0 5 0\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 14,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Больше остатка",
+            "input": "5 6\n",
+            "expected": "0 5 0\n",
+            "actual": "0 5 0\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Отрицательный склад",
+            "input": "-1 1\n",
+            "expected": "0 -1 0\n",
+            "actual": "0 -1 0\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Весь остаток",
+            "input": "10 10\n",
+            "expected": "1 0 0\n",
+            "actual": "1 0 0\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Отрицательный запрос",
+            "input": "9 -2\n",
+            "expected": "0 9 0\n",
+            "actual": "0 9 0\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          }
+        ],
+        "durationMs": 881,
+        "checkedAt": "2026-11-25T16:42:45.9472059+03:00"
+      },
+      "updatedAt": "2026-11-25T16:42:46.8295187+03:00"
+    },
+    "4.2": {
+      "code": "#include \u003ciostream\u003e\n\nint priceFor(int sessions, bool discounted) {\n    // TODO: проверка 1..12, скидка и именованные constexpr.\n    constexpr int PRICE_PER_SESSION = 150;\n    constexpr int MIN_SESSIONS = 1;\n    constexpr int MAX_SESSIONS = 12;\n    constexpr int DISCOUNT_PERCENT = 20;\n    constexpr int PERCENT_BASE = 100;\n    \n    if (sessions \u003c MIN_SESSIONS || sessions \u003e MAX_SESSIONS) return -1;\n    \n    int price = sessions * PRICE_PER_SESSION;\n    if (discounted) {\n        price = price * (PERCENT_BASE - DISCOUNT_PERCENT) / PERCENT_BASE;\n    }\n    return price;\n}\n\nbool finishSale(int sessions, bool discounted, int* wallet, int\u0026 receipt) {\n    // TODO: разделите расчёт, проверку и запись результата.\n    if (wallet == nullptr) return false;\n    if (*wallet \u003c 0) return false;\n    \n    int price = priceFor(sessions, discounted);\n    if (price == -1) return false;          // невалидные сессии\n    if (*wallet \u003c price) return false;      // недостаточно средств\n    \n    *wallet -= price;\n    receipt = price;\n    return true;\n}\n\nint main() {\n    int sessions{}, student{}, money{}, absent{};\n    if (!(std::cin \u003e\u003e sessions \u003e\u003e student \u003e\u003e money \u003e\u003e absent)) return 1;\n    int receipt = -99;\n    bool ok = finishSale(sessions, student != 0, absent ? nullptr : \u0026money, receipt);\n    std::cout \u003c\u003c ok \u003c\u003c \" \" \u003c\u003c money \u003c\u003c \" \" \u003c\u003c receipt \u003c\u003c \" \"\n              \u003c\u003c priceFor(sessions, student != 0) \u003c\u003c \"\\n\";\n}",
+      "result": {
+        "status": "passed",
+        "message": "Все проверки пройдены.",
+        "codeHash": "e8b384f2577497072b4a655f863f7e326257db94ce452c2cdd57eca02b9308e8",
+        "compiler": "gcc",
+        "standard": "c++20",
+        "compilation": "",
+        "cases": [
+          {
+            "name": "Одна обычная запись",
+            "input": "1 0 200 0\n",
+            "expected": "1 50 150 150\n",
+            "actual": "1 50 150 150\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 48,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Две льготные",
+            "input": "2 1 300 0\n",
+            "expected": "1 60 240 240\n",
+            "actual": "1 60 240 240\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 30,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Четыре льготные",
+            "input": "4 1 500 0\n",
+            "expected": "1 20 480 480\n",
+            "actual": "1 20 480 480\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 14,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Максимум занятий",
+            "input": "12 0 1800 0\n",
+            "expected": "1 0 1800 1800\n",
+            "actual": "1 0 1800 1800\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Максимум со скидкой",
+            "input": "12 1 1500 0\n",
+            "expected": "1 60 1440 1440\n",
+            "actual": "1 60 1440 1440\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Ноль занятий",
+            "input": "0 0 1000 0\n",
+            "expected": "0 1000 -99 -1\n",
+            "actual": "0 1000 -99 -1\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Свыше лимита",
+            "input": "13 0 10000 0\n",
+            "expected": "0 10000 -99 -1\n",
+            "actual": "0 10000 -99 -1\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 14,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Мало денег",
+            "input": "1 0 120 0\n",
+            "expected": "0 120 -99 150\n",
+            "actual": "0 120 -99 150\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Нет указателя",
+            "input": "1 0 200 1\n",
+            "expected": "0 200 -99 150\n",
+            "actual": "0 200 -99 150\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Отрицательное количество",
+            "input": "-1 1 500 0\n",
+            "expected": "0 500 -99 -1\n",
+            "actual": "0 500 -99 -1\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          },
+          {
+            "name": "Отрицательный кошелёк",
+            "input": "3 1 -10 0\n",
+            "expected": "0 -10 -99 360\n",
+            "actual": "0 -10 -99 360\r\n",
+            "stderr": "",
+            "passed": true,
+            "exit": 0,
+            "expectedExit": 0,
+            "durationMs": 13,
+            "message": "Проверка пройдена."
+          }
+        ],
+        "durationMs": 953,
+        "checkedAt": "2026-11-25T16:42:46.8636243+03:00"
+      },
+      "updatedAt": "2026-11-25T16:42:47.8177675+03:00"
+    },
+    "5.1": {
+      "code": "// ЗАДАНИЕ 5.1 — КОД-РЕВЬЮ\n// Прочитайте программу и ответьте на вопросы в трёх полях слева.\n// В примере специально оставлены проблемы для анализа.\n// Переписывать код справа для сдачи не требуется.\n\n#include \u003ciostream\u003e\n\n// Передача по значению: balance — локальная копия.\nvoid addCopy(int balance, int amount)\n{\n    if (amount \u003e 0)\n        balance += amount;\n}\n\n// Передача по ссылке: можно изменить исходную переменную.\nvoid addReference(int\u0026 balance, int amount)\n{\n    if (amount \u003e 0)\n        balance += amount;\n}\n\n// Передача по указателю: проверьте безопасность условий.\nbool payWithPointer(int* balance, int price)\n{\n    if (*balance \u003e= price)\n    {\n        *balance -= price;\n        return true;\n    }\n    return false;\n}\n\nint main()\n{\n    int balance{100};\n\n    addCopy(balance, 25);\n    addReference(balance, 25);\n\n    const bool paid = payWithPointer(\u0026balance, 30);\n\n    std::cout \u003c\u003c \"balance: \" \u003c\u003c balance \u003c\u003c \"\\n\";\n    std::cout \u003c\u003c \"paid: \" \u003c\u003c paid \u003c\u003c \"\\n\";\n\n    return 0;\n}\n\n// ВОПРОСЫ ДЛЯ АНАЛИЗА\n// 1. Каков вывод и почему int, int\u0026 и int* ведут себя так?\n// 2. Что произойдёт при nullptr или отрицательной цене?\n//    Где и в каком порядке нужны проверки?\n// 3. Как улучшить структуру похожего кода в заданиях\n//    1.1, 4.1 или 4.2? Приведите пример своего решения.\n",
+      "answers": [
+        " Вывод: balance: 95, paid: 1.\naddCopy — копия, оригинал не меняется (остаётся 100).\naddReference — ссылка на оригинал, +25 → 125.\npayWithPointer — указатель на оригинал, −30 → 95.",
+        "Опасная строка: if (*balance \u003e= price) — здесь *balance разыменовывает указатель. Если balance == nullptr, программа упадёт. Поэтому сначала if (balance == nullptr) return false;, потом уже лезем в *balance.\n\nОтрицательная цена: *balance -= price при price = -50 прибавит 50 вместо списания. Нужна проверка if (price \u003c= 0) return false;.\n\nПорядок проверок: nullptr → цена \u003e 0 → баланс ≥ 0 → хватает денег → списание.",
+        "Задача 4.1.\nВынес проверку в отдельную функцию canShip (stock \u003e= 0 \u0026\u0026 requested \u003e 0 \u0026\u0026 requested \u003c= stock).\nship вызывает canShip и меняет остаток только при успехе.\nУбрал дублирование условия.\n\nПроверка: пример 3 1 → 1 2 1 (совпало); requested = 0 → отказ, остаток цел; requested \u003e stock → отказ, остаток цел; отрицательный stock → отказ. Сигнатуры и вывод сохранены — автопроверка прошла."
+      ],
+      "updatedAt": "2026-11-25T16:44:14.1923791+03:00"
+    }
+  }
+}
